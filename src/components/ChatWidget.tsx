@@ -51,14 +51,14 @@ const ChatWidget = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       {open && (
-        <Card className="mb-3 w-[92vw] max-w-sm animate-enter p-3 md:max-w-md">
+        <Card className="mb-3 w-[92vw] max-w-sm animate-enter p-3 md:max-w-md bg-card border shadow-elegant">
           <div className="mb-2 flex items-center justify-between">
             <p className="font-semibold">AdWhey Assistant</p>
             <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>Close</Button>
           </div>
           <div ref={listRef} className="mb-3 max-h-64 space-y-2 overflow-auto pr-1">
             {messages.map((m, i) => (
-              <div key={i} className={cn("rounded-md px-3 py-2 text-sm", m.role === "user" ? "bg-secondary" : "bg-accent")}>{m.content}</div>
+              <div key={i} className={cn("rounded-md px-3 py-2 text-sm border", m.role === "user" ? "bg-secondary" : "bg-accent")}>{m.content}</div>
             ))}
           </div>
           <div className="mb-2 flex flex-wrap gap-2">

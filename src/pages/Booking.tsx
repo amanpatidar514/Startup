@@ -72,10 +72,10 @@ const Booking = () => {
             <div className="md:col-span-1">
               <label className="mb-1 block text-sm">Service</label>
               <Select onValueChange={(v)=> setValue("service", v)}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-background">
                   <SelectValue placeholder="Choose a service" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-popover text-popover-foreground border shadow-md z-50">
                   <SelectItem value="social-ads">Paid Social Ads</SelectItem>
                   <SelectItem value="content">Content Production</SelectItem>
                   <SelectItem value="strategy">Social Strategy</SelectItem>
