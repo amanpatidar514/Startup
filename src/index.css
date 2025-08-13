@@ -39,21 +39,30 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brand tokens */
+    --brand: 262 83% 56%; /* violet */
+    --brand-2: 200 95% 45%; /* cyan */
+
+    /* Gradients & effects */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--brand-2)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+
+    /* Shadows */
+    --shadow-elegant: 0 12px 30px -10px hsl(var(--brand) / 0.30);
+    --shadow-glow: 0 0 40px hsl(var(--brand-2) / 0.45);
+
+    /* Motion */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
 
   .dark {
     --background: 222.2 84% 4.9%;
@@ -91,6 +100,14 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brand tokens (dark) */
+    --brand: 263 90% 68%;
+    --brand-2: 200 95% 55%;
+
+    /* Shadows */
+    --shadow-elegant: 0 12px 30px -10px hsl(var(--brand) / 0.35);
+    --shadow-glow: 0 0 50px hsl(var(--brand-2) / 0.5);
   }
 }
 
@@ -103,3 +120,13 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-subtle { background-image: var(--gradient-subtle); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .hover-scale { @apply transition-transform duration-200 hover:scale-105; }
+  .story-link { @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left; }
+}
+
