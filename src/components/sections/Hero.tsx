@@ -38,6 +38,9 @@ const Hero = () => {
               <Link to="/portfolio">View Portfolio</Link>
             </Button>
           </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Already a member? <Link to="/auth" className="story-link">Sign in</Link> or <Link to="/auth" className="story-link">create an account</Link>.
+          </p>
         </div>
         <aside className="relative">
           <img
