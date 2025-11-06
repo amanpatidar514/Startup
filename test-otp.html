@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Test</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>OTP Edge Function Test</h1>
+    <input type="email" id="email" placeholder="Enter email" value="test@example.com">
+    <button onclick="testOTP()">Test OTP Function</button>
+    <div id="result"></div>
+
+    <script>
+        const SUPABASE_URL = "https://woxunjtdckhivxgfqqko.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndveHVuanRkY2toaXZ4Z2ZxcWtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNDg2MDUsImV4cCI6MjA3MDYyNDYwNX0.5jdeBb3Ik2yyRtGZ5laSjj3k3z5o3MmJZtuiJ5Z296o";
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function testOTP() {
+            const email = document.getElementById('email').value;
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                console.log('Testing OTP function for email:', email);
+                
+                const { data, error } = await supabase.functions.invoke('send-otp', {
+                    body: { email: email }
+                });
+                
+                if (error) {
+                    console.error('Error:', error);
+                    resultDiv.innerHTML = `<p style="color: red;">Error: ${JSON.stringify(error, null, 2)}</p>`;
+                } else {
+                    console.log('Success:', data);
+                    resultDiv.innerHTML = `<p style="color: green;">Success: ${JSON.stringify(data, null, 2)}</p>`;
+                }
+            } catch (err) {
+                console.error('Exception:', err);
+                resultDiv.innerHTML = `<p style="color: red;">Exception: ${err.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,38 +1,52 @@
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+// Pages
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Portfolio from "./pages/Portfolio";
-import Booking from "./pages/Booking";
-import ChatWidget from "./components/ChatWidget";
 import Auth from "./pages/Auth";
+import Booking from "./pages/Booking";
+import Portfolio from "./pages/Portfolio";
+import Admin from "./pages/Admin";
+import Profile from "./pages/Profile";
+import InstagramSMM from "./pages/InstagramSMM";
+import YouTubeSMM from "./pages/YouTubeSMM";
+import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+function App() {
+  return (
+    <div className="min-h-screen bg-black">
+      <ScrollToTop />
+      <ScrollToTopButton />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/instagram-smm" element={<InstagramSMM />} />
+        <Route path="/youtube-smm" element={<YouTubeSMM />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
+}
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+function AppWrapper() {
+  return (
+    <BrowserRouter>
       <HelmetProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/auth" element={<Auth />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <ChatWidget />
-        </BrowserRouter>
+        <TooltipProvider>
+          <App />
+          <Toaster />
+        </TooltipProvider>
       </HelmetProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </BrowserRouter>
+  );
+}
 
-export default App;
+export default AppWrapper;

@@ -15,3 +15,9 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     autoRefreshToken: true,
   }
 });
+
+// IMPORTANT: To disable email confirmation, go to your Supabase Dashboard:
+// 1. Go to Authentication > Settings
+// 2. Under "Email Auth" section
+// 3. Turn OFF "Enable email confirmations"
+// 4. Save the changes
